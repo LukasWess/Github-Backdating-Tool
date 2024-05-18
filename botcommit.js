@@ -37,27 +37,27 @@ function commitChanges() {
     const formattedDate = formatDate(date);
     const commitMessage = `Commit on ${formattedDate}`;
 
-    exec('git pull origin main --allow-unrelated-histories', (pullErr, pullStdout, pullStderr) => {
+    exec('git pull origin main', (pullErr, pullStdout, pullStderr) => {
         if (pullErr) {
             console.error(`Error pulling: ${pullStderr}`);
             return;
         }
         console.log(`Pull output: ${pullStdout}`);
-
+    
         exec('git add .', (addErr, addStdout, addStderr) => {
             if (addErr) {
                 console.error(`Error adding files: ${addStderr}`);
                 return;
             }
             console.log(`Files added: ${addStdout}`);
-
+    
             exec(`git commit --date="${formattedDate}" -m "${commitMessage}"`, (commitErr, commitStdout, commitStderr) => {
                 if (commitErr) {
                     console.error(`Error committing: ${commitStderr}`);
                     return;
                 }
                 console.log(`Committed: ${commitStdout}`);
-
+    
                 exec('git push origin main', (pushErr, pushStdout, pushStderr) => {
                     if (pushErr) {
                         console.error(`Error pushing: ${pushStderr}`);
