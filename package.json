@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bot.js"
+    "start": "concurrently \"node bot.js\" \"node botcommit.js\""
   },
   "keywords": [],
   "author": "",
