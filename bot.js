@@ -4,38 +4,7 @@ const path = require('path');
 // Path to the file you want to append to
 const filePath = path.join(__dirname, './target.js');
 
-// Function to append lines of code
-function appendCode() {
-    // Set the date to the past (e.g., 1 day ago)
-    const pastDate = new Date();
-    pastDate.setDate(pastDate.getDate() - 1);
 
-    const codeToAdd = `
-// This is a new line of code
-console.log('New line of code added at ' + '${pastDate.toISOString()}');
-`;
-
-    fs.appendFile(filePath, codeToAdd, (err) => {
-        if (err) throw err;
-        console.log('The code was appended to the file!');
-    });
-}
-
-// Set an interval to run the appendCode function every few minutes (e.g., every 5 minutes)
-setInterval(appendCode, 5 * 60 * 1000);
-
-// Initial call to append code immediately
-appendCode();
-function getRandomDate() {
-    const start = new Date();
-    start.setFullYear(start.getFullYear() - 3);
-    const end = new Date();
-    let date;
-    do {
-        date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    } while (date.getDay() === 0 || isHoliday(date));
-    return date;
-}
 
 function isHoliday(date) {
     const holidays = [
@@ -72,7 +41,7 @@ function appendString() {
 }
 
 // Set an interval to run the appendString function every 10 seconds
-setInterval(appendString, 10 * 1000);
+setInterval(appendString, 15 * 1000);
 
 // Initial call to append the string immediately
 appendString();

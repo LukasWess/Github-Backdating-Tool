@@ -10,7 +10,7 @@ const holidays = [
 
 function getRandomDate() {
     const start = new Date();
-    start.setFullYear(start.getFullYear() - 3);
+    start.setFullYear(start.getFullYear() - 1);
     const end = new Date();
     const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     
