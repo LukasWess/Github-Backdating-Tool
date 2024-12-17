@@ -1,5 +1,4 @@
 const { exec } = require('child_process');
-const fs = require('fs');
 const path = require('path');
 
 console.log("Starting botcommit.js...");
@@ -32,45 +31,47 @@ function formatDate(date) {
     return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
 }
 
-function commit() {
+function commitChanges() {
     console.log("Running commit function...");
     const date = getRandomDate();
     const formattedDate = formatDate(date);
     const commitMessage = `Commit on ${formattedDate}`;
 
-    // Append a comment to the target.js file
-    const targetFilePath = path.join(__dirname, 'target.js');
-    try {
-        fs.appendFileSync(targetFilePath, `\n// test`);
-        console.log(`Appended to ${targetFilePath}`);
-    } catch (err) {
-        console.error(`Error appending to file: ${err}`);
-        return;
-    }
-
-    exec(`git add ${targetFilePath}`, (err, stdout, stderr) => {
-        if (err) {
-            console.error(`Error adding file: ${stderr}`);
+    exec('git pull origin main --allow-unrelated-histories', (pullErr, pullStdout, pullStderr) => {
+        if (pullErr) {
+            console.error(`Error pulling: ${pullStderr}`);
             return;
         }
-        console.log(`File added: ${stdout}`);
+        console.log(`Pull output: ${pullStdout}`);
 
-        exec(`git commit --amend --date="${formattedDate}" -m "test"`, (err, stdout, stderr) => {
-            if (err) {
-                console.error(`Error committing: ${stderr}`);
+        exec('git add .', (addErr, addStdout, addStderr) => {
+            if (addErr) {
+                console.error(`Error adding files: ${addStderr}`);
                 return;
             }
-            console.log(`Committed: ${stdout}`);
+            console.log(`Files added: ${addStdout}`);
 
-            exec(`git push`, (err, stdout, stderr) => {
-                if (err) {
-                    console.error(`Error pushing: ${stderr}`);
-                } else {
-                    console.log(`Pushed: ${stdout}`);
+            exec(`git commit --date="${formattedDate}" -m "${commitMessage}"`, (commitErr, commitStdout, commitStderr) => {
+                if (commitErr) {
+                    console.error(`Error committing: ${commitStderr}`);
+                    return;
                 }
+                console.log(`Committed: ${commitStdout}`);
+
+                exec('git push origin main', (pushErr, pushStdout, pushStderr) => {
+                    if (pushErr) {
+                        console.error(`Error pushing: ${pushStderr}`);
+                        return;
+                    }
+                    console.log(`Pushed: ${pushStdout}`);
+                });
             });
         });
     });
 }
 
-setInterval(commit, 30 * 1000); // Commit every 30 seconds
+// Run the commit function every 30 seconds
+setInterval(commitChanges, 30 * 1000);
+
+// Initial call to commit changes immediately
+commitChanges();
