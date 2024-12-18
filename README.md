@@ -41,10 +41,12 @@ Run the Script: Start the script using the following command:
 ```
 npm start
 ```
+Set up and connect to your github repo, run the code as instructed. Watch the terminal for output.
+
+All done, let it run and watch you github contribution graph go up. 
+
 
 
 Additional Information
-
-The script will append a specific string to target.js every 15 seconds.
 
 Ensure target.js exists in the same directory as bot.js.
