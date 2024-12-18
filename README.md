@@ -1,6 +1,8 @@
 # BotTheBuilder
 
-This tool how simple github backdating can be done. 
+This tool shows how simple github backdating can be done. 
+
+
 Its adding a new line to target.js every 15 seconds trough bot.js. The desired output to the target.js file can be edited in the bot.js file under the: 
 
 ```
@@ -24,20 +26,22 @@ Ensure you have Node.js installed on your machine. You can download it from node
 Steps to Install and Run the Script
 
 Clone the Repository: Clone the repository to your local machine using the following command: 
-
-git clone https://github.com/LukasWess/BotTheBuilder
-
+```
+git clone https://github.com/LukasWess/Github-Backdating-Tool.git
+```
 Navigate to the Project Directory: Open a terminal and navigate to the directory containing your project files:
-
+```
 cd /path/to/your/project
-
+```
 Install Dependencies: If there are any dependencies listed in the package.json file, install them using npm:
-
+```
 npm install
-
+```
 Run the Script: Start the script using the following command:
-
+```
 npm start
+```
+
 
 Additional Information
 
