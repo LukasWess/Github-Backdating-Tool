@@ -2,14 +2,16 @@
 
 This tool how simple github backdating can be done. 
 Its adding a new line to target.js every 15 seconds trough bot.js. The desired output to the target.js file can be edited in the bot.js file under the: 
-'''
+
+```
 function appendString() {
     const stringToAdd = `I will be a dev\n`;
-'''
+```
 Every 30 seconds botcommit.js will commit the new lines with a randomized time stamp for the last year. This can easily be increased further by adjusting the minus value on this line in botcommit.js file 
-'''
+
+```
 start.setFullYear(start.getFullYear() - 1);
-'''
+```
 
 
 
