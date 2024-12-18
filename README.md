@@ -37,11 +37,13 @@ Install Dependencies: If there are any dependencies listed in the package.json f
 ```
 npm install
 ```
+Set up and connect to your github repo, run the code as instructed. Watch the terminal for output.
+
 Run the Script: Start the script using the following command:
 ```
 npm start
 ```
-Set up and connect to your github repo, run the code as instructed. Watch the terminal for output.
+
 
 All done, let it run and watch your github contribution graph go up. 
 
